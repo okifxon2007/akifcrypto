@@ -30,11 +30,11 @@ const BitcoinInfo = () => {
     return <div className="text-white">
        <div className="flex items-center justify-center h-screen bg-gray-800">
       <div className="relative w-24 h-24">
-        {/* Tashqi aylana */}
+       
         <div className="absolute inset-0 border-4 border-t-blue-500 border-b-blue-500 border-l-transparent border-r-transparent rounded-full animate-spin"></div>
-        {/* Ichki aylana */}
+       
         <div className="absolute inset-4 border-4 border-l-blue-500 border-r-blue-500 border-t-transparent border-b-transparent rounded-full animate-spin-reverse"></div>
-        {/* Markazdagi nuqta */}
+        
         <div className="absolute inset-8 bg-blue-500 rounded-full"></div>
       </div>
     </div>

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { data, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify"; 
+import "react-toastify/dist/ReactToastify.css"; 
 const Maincrypto = () => {
   const [search, setSearch] = useState("");
   const [data, setdata] = useState([])
   const [page, setpage] = useState(1)
   
   const nav = useNavigate()
-  console.log(page);
   function handlecard(id){
     nav(`/pages/${id}`)
   }
@@ -24,11 +25,11 @@ const Maincrypto = () => {
       })
       .catch(err =>{
         console.log(err);
-        
+        toast.error("Ma'lumotlarni yuklashda xatolik yuz berdi!");
       })
       } catch (error) {
         console.log('qandaydir hatolik yuz berdi');
-        
+        toast.error("Ma'lumotlarni yuklashda xatolik yuz berdi!");
       }
      
       
@@ -47,8 +48,25 @@ const Maincrypto = () => {
       setpage(prevvPage => prevvPage - 1);
       localStorage.setItem('page', page)
   }
-  
-  
+  const handleClick = (e, id, price_change_percentage_24h, symbol, image, ath_change_percentage) => {
+    toast.success(`ma'lumotlari saqlandi! agar korinmasa sahifani yangilang`);
+    e.stopPropagation(); 
+    
+    const mal = {
+       id:id,
+       ath:ath_change_percentage, 
+       img:image, 
+       symbol:symbol,
+       price:price_change_percentage_24h
+      } 
+
+      const malparse = JSON.parse(localStorage.getItem('malumot')||'[]')
+
+      malparse.push(mal)
+      
+      localStorage.setItem('malumot', JSON.stringify(malparse))
+  }
+
 
 
   return (
@@ -99,7 +117,7 @@ const Maincrypto = () => {
     color: value.ath_change_percentage >= 0 ? 'green' : 'red',
   }}
 >
-  {value.ath_change_percentage}
+ <button onClick={(e) => handleClick(e, value.id, value.ath_change_percentage, value.price_change_percentage_24h, value.symbol,value.image,value.ath_change_percentage )}><i class="fas fa-eye"></i> </button> {value.ath_change_percentage}
 </td>
 
              <td className="px-4 py-2 border-b border-gray-700">
@@ -117,7 +135,9 @@ const Maincrypto = () => {
         <div className="ml-auto mr-auto flex justify-center mt-10">
         <button className="text-4xl" onClick={handleback}>⬅️---</button>
         <button className="text-4xl" onClick={handlenext}>➡️</button>
+
         </div>
+        <ToastContainer />
       </div>
     </div>
   );
