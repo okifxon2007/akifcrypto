@@ -51,7 +51,7 @@ const BitcoinInfo = () => {
             <h1 className="text-4xl font-bold">{idd.name}</h1>
           </div>
 
-          <p className="text-gray-300 leading-relaxed">
+          <p className="text-gray-300 leading-relaxed w-80">
   {idd.description.en.split(' ').slice(0, 10).join(' ') + (idd.description.en.split(' ').length > 10 ? '...' : '')}
 </p>
 
