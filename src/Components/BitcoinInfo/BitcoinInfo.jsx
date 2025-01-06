@@ -52,8 +52,9 @@ const BitcoinInfo = () => {
           </div>
 
           <p className="text-gray-300 leading-relaxed">
-            {idd.description.en}
-          </p>
+  {idd.description.en.split(' ').slice(0, 10).join(' ') + (idd.description.en.split(' ').length > 10 ? '...' : '')}
+</p>
+
 
           <div className="space-y-2">
             <p className="text-lg">
